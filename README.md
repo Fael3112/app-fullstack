@@ -1,14 +1,30 @@
-# End-to-End DevOps Platform — Application
+# app-fullstack
+
+Application repository for an end-to-end DevOps / Cloud portfolio project.
 
 ## Goal
-Build and containerize a fullstack application and ship it through a production-grade CI/CD pipeline.
+Build a simple fullstack application and deliver it through a production-grade CI/CD
+pipeline, focusing on DevOps, Cloud and DevSecOps practices rather than business logic.
 
-## Scope (this repository)
-- Backend + Frontend application code
-- Docker multi-stage builds
-- CI (lint, tests, coverage, integration tests with DB)
-- Build & publish container images (registry)
-- Deployment (dev target first, prod later via Kubernetes/Helm in dedicated repos)
+## Scope of this repository
+- Backend application (FastAPI)
+- Automated tests (unit and basic integration)
+- Containerization (Docker, multi-stage builds)
+- CI with GitHub Actions
+- Container image publishing
+
+Infrastructure provisioning, Kubernetes deployment and Helm packaging are handled in
+dedicated repositories.
+
+## Current state
+- FastAPI backend initialized
+- Health endpoints implemented (`/health`, `/health/db`)
+- Basic tests in place (pytest)
+
+## Tech stack
+- Python / FastAPI
+- PostgreSQL (external dependency)
+- pytest / pytest-cov
 
 ## Status
-🟡 Project initialized (scaffolding)
+🟡 Backend foundation in progress.
