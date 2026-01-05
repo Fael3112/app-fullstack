@@ -19,12 +19,15 @@ dedicated repositories.
 ## Current state
 - FastAPI backend initialized
 - Health endpoints implemented (`/health`, `/health/db`)
-- Basic tests in place (pytest)
+- Docker multi-stage build (base / test / runtime)
+- Tests executed via Docker Compose with PostgreSQL
+- Runtime container with functional healthcheck
 
 ## Tech stack
 - Python / FastAPI
-- PostgreSQL (external dependency)
+- PostgreSQL
 - pytest / pytest-cov
+- Docker / Docker Compose
 
 ## Status
-🟡 Backend foundation in progress.
+🟡 Application containerization and local CI-like workflow completed.
