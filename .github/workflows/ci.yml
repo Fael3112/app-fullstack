@@ -31,10 +31,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Run tests in Docker
+      - name: Lint (ruff) in Docker
         run: |
-          docker build --target test .
-          docker run \
+          docker build --target test -t app-tests .
+          docker run --rm app-tests ruff check .
+
+      - name: Tests + Coverage in Docker
+        run: |
+          docker run --rm \
             --network host \
             -e DATABASE_URL=postgresql+psycopg2://app:app@localhost:5432/appdb \
-            $(docker images --quiet | head -n 1)
+            app-tests pytest -q --cov=. --cov-report=term-missing --cov-fail-under=80
