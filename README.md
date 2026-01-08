@@ -22,6 +22,7 @@ dedicated repositories.
 - Docker multi-stage build (base / test / runtime)
 - Tests executed via Docker Compose with PostgreSQL
 - Runtime container with functional healthcheck
+- GitHub Actions CI: ruff lint + pytest with Postgres + coverage gate
 
 ## Tech stack
 - Python / FastAPI
