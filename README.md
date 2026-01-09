@@ -1,6 +1,6 @@
 # app-fullstack
 
-Application repository for an end-to-end DevOps / Cloud portfolio project.
+Application repository for an end-to-end DevOps / Cloud portfolio project. The project currently focuses on backend services, as the primary goal is to demonstrate DevOps and Cloud practices rather than frontend development.
 
 ## Goal
 Build a simple fullstack application and deliver it through a production-grade CI/CD
@@ -23,6 +23,7 @@ dedicated repositories.
 - Tests executed via Docker Compose with PostgreSQL
 - Runtime container with functional healthcheck
 - GitHub Actions CI: ruff lint + pytest with Postgres + coverage gate
+- Container image published to GHCR on release tags (v*)
 
 ## Tech stack
 - Python / FastAPI
@@ -32,3 +33,7 @@ dedicated repositories.
 
 ## Status
 🟡 Application containerization and local CI-like workflow completed.
+
+
+
+This repository serves as the application layer of a larger DevOps platform project.
