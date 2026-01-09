@@ -68,6 +68,8 @@ jobs:
 
       - name: Build and push runtime image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/app-fullstack:${{ github.ref_name }}
-          docker build --target runtime -t $IMAGE .
-          docker push $IMAGE
+          REPO_LC=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE="ghcr.io/${REPO_LC}:${{ github.ref_name }}"
+          docker build --target runtime -t "$IMAGE" .
+          docker push "$IMAGE"
+
