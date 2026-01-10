@@ -3,7 +3,7 @@
 This repository implements a pragmatic testing strategy focused on CI reliability
 and production readiness rather than extensive business logic coverage.
 
-The goal is to ensure that the application can be built, tested and packaged
+The goal is to validate that the application can be built, tested and packaged
 consistently across local and CI environments.
 
 ---
@@ -12,51 +12,55 @@ consistently across local and CI environments.
 
 ### Unit tests
 
-Unit tests validate the application logic in isolation.
+Unit tests validate application behaviour in isolation.
 
 They focus on:
-- API endpoints behaviour
+- API endpoints responses
 - application startup
-- basic response validation
+- basic functional checks
 
-Unit tests are executed using `pytest` and do not require external services.
+Unit tests do not require any external services and can be executed locally
+without additional dependencies.
 
 ---
 
-### Integration-ready tests
+### Integration tests (PostgreSQL)
 
-The test environment is designed to support integration testing with PostgreSQL.
+A first database integration test is implemented to validate real connectivity
+between the API and PostgreSQL.
 
-During CI runs:
-- a real PostgreSQL instance is provisioned
-- the application receives its database configuration via `DATABASE_URL`
-- tests are executed inside Docker, ensuring consistent environments
+This test:
+- relies on a real PostgreSQL instance
+- exercises the `/health/db` endpoint
+- validates that the application can establish a database connection at runtime
 
-At this stage, the database is made available to the test suite, but integration
-tests are intentionally minimal.
+The test is conditionally executed:
+- it runs only when the `DATABASE_URL` environment variable is set
+- it is automatically skipped otherwise
 
-This design allows future integration tests to be added without changing the
-CI pipeline or application configuration.
+This allows the same test suite to be executed:
+- locally without a database
+- in CI with a provisioned PostgreSQL service
 
 ---
 
 ## Test execution model
 
-Tests are executed inside Docker containers rather than directly on the CI runner.
+Tests are executed inside Docker containers rather than directly on the host
+or CI runner.
 
 This approach ensures:
 - consistent Python and dependency versions
-- identical behaviour between local development and CI
-- reproducible failures
+- reproducible test results
+- alignment between local development and CI environments
 
-The Dockerfile provides a dedicated `test` stage that includes all tools required
-for linting and testing.
+The Dockerfile provides a dedicated `test` stage used for both linting and testing.
 
 ---
 
 ## Code quality gates
 
-The CI pipeline enforces several quality gates:
+The CI pipeline enforces multiple quality gates:
 
 - Static analysis using `ruff`
 - Test execution using `pytest`
@@ -73,17 +77,15 @@ Code coverage is measured using `pytest-cov`.
 A minimum coverage threshold is enforced to prevent regressions, while avoiding
 over-optimization on coverage metrics.
 
-Coverage is used as a safety net rather than a performance indicator.
+Coverage is treated as a safety mechanism rather than a performance indicator.
 
 ---
 
 ## Future improvements
 
-The testing strategy is intentionally designed to evolve.
+The testing strategy is designed to evolve incrementally.
 
-Planned improvements include:
-- explicit database integration tests
-- validation of `/health/db` endpoint behaviour
-- expanded integration coverage as application complexity grows
-
-No structural changes to the CI pipeline will be required to support these additions.
+Potential future improvements include:
+- additional database integration tests
+- schema or migration validation
+- expanded endpoint-level integration coverage
