@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 FROM base AS test
 
 COPY app/backend/ /app/
-COPY tests/ /app/backend/tests/
+COPY app/backend/tests/ /app/tests/
 
 ENV DATABASE_URL=postgresql+psycopg2://app:app@db:5432/appdb
 
