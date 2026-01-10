@@ -22,7 +22,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # =========================
 FROM base AS test
 
-COPY app/backend .
+COPY app/backend/ /app/
+COPY tests/ /app/tests/
 
 ENV DATABASE_URL=postgresql+psycopg2://app:app@db:5432/appdb
 
@@ -46,7 +47,7 @@ USER appuser
 COPY --from=base /usr/local/lib/python3.11 /usr/local/lib/python3.11
 COPY --from=base /usr/local/bin /usr/local/bin
 
-COPY app/backend .
+COPY app/backend/ /app/
 
 EXPOSE 8000
 
