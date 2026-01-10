@@ -39,6 +39,10 @@ jobs:
           docker build --target test -t app-tests .
           docker run --rm app-tests ruff check .
 
+      - name: SAST (bandit) in Docker
+        run: |
+          docker run --rm app-tests bandit -q -r . -x .venv
+
       - name: Tests + Coverage in Docker
         run: |
           docker run --rm \
