@@ -21,6 +21,7 @@ dedicated repositories.
 - Health endpoints implemented (`/health`, `/health/db`)
 - Docker multi-stage build (base / test / runtime)
 - Tests executed via Docker Compose with PostgreSQL
+- First database integration test implemented (`/health/db`)
 - Runtime container with functional healthcheck
 - GitHub Actions CI: ruff lint + pytest with Postgres + coverage gate
 - Container image published to GHCR on release tags (v*)
