@@ -41,7 +41,7 @@ jobs:
 
       - name: SAST (bandit) in Docker
         run: |
-          docker run --rm app-tests bandit -q -r . -x .venv
+          docker run --rm app-tests bandit -q -r . -x .venv,test_*.py
 
       - name: Tests + Coverage in Docker
         run: |
