@@ -41,7 +41,7 @@ jobs:
 
       - name: SAST (bandit) in Docker
         run: |
-          docker run --rm app-tests bandit -q -r . --exclude .venv,tests
+          docker run --rm app-tests bandit -q -r . --exclude /app/backend/tests,/app/backend/.venv
 
       - name: Tests + Coverage in Docker
         run: |
