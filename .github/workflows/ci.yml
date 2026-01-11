@@ -94,6 +94,17 @@ jobs:
           exit-code: "1"
           ignore-unfixed: true
 
+      - name: Trivy image scan (debug table on failure)
+        if: failure()
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: ${{ steps.img.outputs.image }}
+          format: table
+          vuln-type: "os,library"
+          severity: "HIGH,CRITICAL"
+          exit-code: "1"
+          ignore-unfixed: true
+
       - name: Upload Trivy SARIF to GitHub Security
         if: startsWith(github.ref, 'refs/tags/')
         uses: github/codeql-action/upload-sarif@v3
